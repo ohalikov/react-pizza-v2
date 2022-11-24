@@ -1,12 +1,19 @@
 import { useState } from 'react';
+
 function PizzaBlock(props) {
-  let { title, price } = props;
+  let { pizzaTitle, price, pizzaImageUrl, sizes, pizzaTypes } = props;
+
   const [pizzaCount, setCounterPizza] = useState(0);
+  const [sizeIndexPizza, setSizePizza] = useState(0);
+  const [typePizza, setTypePizza] = useState(0);
+
+  const typeNamesPizza = ['тонкое', 'Традиционное'];
 
   const incrementPizza = () => {
     console.log(pizzaCount + 1);
     setCounterPizza(pizzaCount + 1);
   };
+
   return (
     <div className="pizza-block">
       <div className="block1">
@@ -16,21 +23,24 @@ function PizzaBlock(props) {
           <li>43433</li>
         </ul>
       </div>
-      <img
-        className="pizza-block__image"
-        src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-        alt="Pizza"
-      />
-      <h4 className="pizza-block__title">{title}</h4>
+      <img className="pizza-block__image" src={pizzaImageUrl} alt="Pizza" />
+      <h4 className="pizza-block__pizzaTitle">{pizzaTitle}</h4>
       <div className="pizza-block__selector">
         <ul>
-          <li className="active">тонкое</li>
-          <li>традиционное</li>
+          {pizzaTypes.map((type) => (
+            <li onClick={() => setTypePizza(type)} className={typePizza === type ? 'active' : ''}>
+              {typeNamesPizza[type]}
+            </li>
+          ))}
         </ul>
         <ul>
-          <li className="active">26 см.</li>
-          <li>30 см.</li>
-          <li>40 см.</li>
+          {sizes.map((itemSize, index) => (
+            <li
+              onClick={() => setSizePizza(index)}
+              className={sizeIndexPizza === index ? 'active' : ''}>
+              {itemSize} см
+            </li>
+          ))}
         </ul>
       </div>
       <div className="pizza-block__bottom">
