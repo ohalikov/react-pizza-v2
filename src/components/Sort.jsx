@@ -30,7 +30,7 @@ export const Sort = () => {
             console.log(isOpen);
             setOpenState(!isOpen);
           }}>
-          {listNamesOfSort[currentSortName]}
+          {currentSortName}
         </span>
       </div>
       {isOpen && (
