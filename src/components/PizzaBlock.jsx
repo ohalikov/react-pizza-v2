@@ -1,8 +1,6 @@
 import { useState } from 'react';
 
-function PizzaBlock(props) {
-  let { pizzaTitle, price, pizzaImageUrl, sizes, pizzaTypes } = props;
-
+export const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
   const [pizzaCount, setCounterPizza] = useState(0);
   const [sizeIndexPizza, setSizePizza] = useState(0);
   const [typePizza, setTypePizza] = useState(0);
@@ -16,35 +14,39 @@ function PizzaBlock(props) {
 
   return (
     <div className="pizza-block">
-      <div className="block1">
+      {/* <div className="block1">
         <ul>
           <li>43433</li>
           <li>43433</li>
           <li>43433</li>
         </ul>
-      </div>
-      <img className="pizza-block__image" src={pizzaImageUrl} alt="Pizza" />
-      <h4 className="pizza-block__pizzaTitle">{pizzaTitle}</h4>
+      </div> */}
+      <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+      <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          {pizzaTypes.map((type) => (
-            <li onClick={() => setTypePizza(type)} className={typePizza === type ? 'active' : ''}>
-              {typeNamesPizza[type]}
+          {types.map((typeId) => (
+            <li
+              key={typeId}
+              onClick={() => setTypePizza(typeId)}
+              className={typePizza === typeId ? 'active' : ''}>
+              {typeNamesPizza[typeId]}
             </li>
           ))}
         </ul>
         <ul>
           {sizes.map((itemSize, index) => (
             <li
+              key={`index-size-${index}`}
               onClick={() => setSizePizza(index)}
               className={sizeIndexPizza === index ? 'active' : ''}>
-              {itemSize} см
+              {`${itemSize} см`}
             </li>
           ))}
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">от {price} ₽</div>
+        <div className="pizza-block__price"> {`от ${price} ₽`}</div>
         <button onClick={incrementPizza} className="button button--outline button--add">
           <svg
             width="12"
@@ -63,6 +65,6 @@ function PizzaBlock(props) {
       </div>
     </div>
   );
-}
+};
 
 export default PizzaBlock;
