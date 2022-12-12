@@ -19,7 +19,7 @@ export const Home = () => {
   console.log(pizzaItems);
 
   return (
-    <>
+    <div className="container">
       <div className="content__top">
         <Categories />
         <Sort />
@@ -32,6 +32,6 @@ export const Home = () => {
               <PizzaBlock key={`pizza_${pizzasObj.id}`} {...pizzasObj} />
             ))}
       </div>
-    </>
+    </div>
   );
 };
